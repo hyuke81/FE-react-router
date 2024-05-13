@@ -1,4 +1,6 @@
 import React from "react";
+import Header from "../containers/Header";
+import { useParams } from 'react-router-dom';
 
 const data = {
     "맘스터치": {
@@ -25,9 +27,23 @@ const data = {
 
 
 const Product = () => {
+    const { id } = useParams();
+
+    if(!data[id]) {
+        return (
+            <>
+                <Header />
+                <p>해당 브랜드의 제품을 찾을 수 없습니다.</p>
+            </>
+        )
+    }
 
     return (
         <>
+            <Header />
+            <h3>{id}</h3>
+            <p>{data[id].title}</p>
+            <p>{data[id].price}</p>
         </>
     )
 }
